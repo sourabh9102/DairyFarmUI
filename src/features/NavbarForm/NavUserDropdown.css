@@ -1,0 +1,7 @@
+.w-full.h-full {
+    z-index: -99;
+}
+
+.nav-user-dropdown:hover .nav-user-dropdown-panel {
+    display: block;
+}

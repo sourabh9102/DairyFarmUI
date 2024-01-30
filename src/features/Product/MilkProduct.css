@@ -1,0 +1,9 @@
+/* Add this if not already present */
+.hover\:zoom-img {
+    transition: transform 1s ease;
+}
+
+/* Add this if not already present */
+.hover\:zoom-img:hover {
+    transform: scale(1.2);
+}

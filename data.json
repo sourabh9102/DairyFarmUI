@@ -1,0 +1,204 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Basic Tee",
+      "imageSrc": "../images/rawMilk.jpg",
+      "imageAlt": "Front of men's Basic Tee in black.",
+      "price": 35,
+      "rating": 4.5,
+      "type": "Raw-milk",
+      "quantity": 1
+    },
+    {
+      "id": 2,
+      "name": "Cheese Slice",
+      "imageSrc": "../images/skimmedMilk.jpg",
+      "imageAlt": "Alt",
+      "price": 25,
+      "rating": 4.5,
+      "type": "Skimmed-milk",
+      "quantity": 1
+    },
+    {
+      "id": 3,
+      "name": "Pure Butter",
+      "imageSrc": "../images/wholeMilk.webp",
+      "imageAlt": "Alt",
+      "price": 25,
+      "rating": 5,
+      "type": "Whole-milk",
+      "quantity": 1
+    },
+    {
+      "id": 4,
+      "name": "Greek Yogurt",
+      "imageSrc": "../images/lowFat.jpg",
+      "imageAlt": "Alt",
+      "price": 25,
+      "rating": 4,
+      "type": "Low-fat-milk",
+      "quantity": 1
+    },
+    {
+      "id": 5,
+      "name": "Basic Tee",
+      "imageSrc": "../images/fullcreamMilk.webp",
+      "imageAlt": "Front of men's Basic Tee in black.",
+      "price": 35,
+      "rating": 4.5,
+      "type": "Full-cream-milk",
+      "quantity": 1
+    },
+    {
+      "id": 6,
+      "name": "Cheese Slice",
+      "imageSrc": "../images/butterMilk.jpg",
+      "imageAlt": "Alt",
+      "price": 25,
+      "rating": 4.5,
+      "type": "Buttermilk",
+      "quantity": 1
+    },
+    {
+      "id": 7,
+      "name": "Cheese From Milk",
+      "imageSrc": "../images/cheeseFromA2Milk1.webp",
+      "imageAlt": "bcd",
+      "price": 35,
+      "rating": 4,
+      "type": "Cheese",
+      "quantity": 1
+    },
+    {
+      "id": 8,
+      "name": "Cheese Slice",
+      "imageSrc": "../images/paneer1.jpg",
+      "imageAlt": "Alt",
+      "price": 25,
+      "rating": 4.5,
+      "type": "Paneer",
+      "quantity": 1
+    },
+    {
+      "id": 9,
+      "name": "Pure Butter",
+      "imageSrc": "../images/butter1.webp",
+      "imageAlt": "Alt",
+      "price": 25,
+      "rating": 5,
+      "type": "Butter",
+      "quantity": 1
+    },
+    {
+      "id": 10,
+      "name": "Cow Ghee",
+      "imageSrc": "../images/cowGhee1.webp",
+      "imageAlt": "Alt",
+      "price": 20,
+      "rating": 4,
+      "type": "Ghee",
+      "quantity": 1
+    },
+    {
+      "id": 11,
+      "name": "Cheese From Curd",
+      "imageSrc": "../images/cheeseFromCurd1.webp",
+      "imageAlt": "Alt",
+      "price": 25,
+      "rating": 4,
+      "type": "Cheese",
+      "quantity": 1
+    },
+    {
+      "id": 12,
+      "name": "Classic Curd",
+      "imageSrc": "../images/curd1.jpg",
+      "imageAlt": "Alt",
+      "price": 25,
+      "rating": 4,
+      "type": "Curd",
+      "quantity": 1
+    },
+    {
+      "id": 13,
+      "name": "Desi Ghee",
+      "imageSrc": "../images/desiGhee1.webp",
+      "imageAlt": "Alt",
+      "price": 25,
+      "rating": 4,
+      "type": "Ghee",
+      "quantity": 1
+    },
+    {
+      "id": 14,
+      "name": "Amul Butter",
+      "imageSrc": "../images/productImg3.jpg",
+      "imageAlt": "Alt",
+      "price": 35,
+      "rating": 4,
+      "type": "Butter",
+      "quantity": 1
+    },
+    {
+      "id": 15,
+      "name": "Desi Gomutra",
+      "imageSrc": "../images/gomutra.jpg",
+      "imageAlt": "Front of men's Basic Tee in black.",
+      "price": 35,
+      "rating": 4.5,
+      "type": "Gomutra",
+      "quantity": 1
+    },
+    {
+      "id": 16,
+      "name": "Cow Dung Cakes",
+      "imageSrc": "../images/cow-dung-cake.jpg",
+      "imageAlt": "Alt",
+      "price": 25,
+      "rating": 4.5,
+      "type": "Cow Dung Cakes",
+      "quantity": 1
+    },
+    {
+      "id": 17,
+      "name": "Herbal Dhupbatti",
+      "imageSrc": "../images/herbalDhupbatti.jpg",
+      "imageAlt": "Alt",
+      "price": 25,
+      "rating": 5,
+      "type": "Dhupbatti",
+      "quantity": 1
+    },
+    {
+      "id": 18,
+      "name": "Vermi Compost",
+      "imageSrc": "../images/vermicompost.jpg",
+      "imageAlt": "Alt",
+      "price": 20,
+      "rating": 4,
+      "type": "Vermi Compost",
+      "quantity": 1
+    },
+    {
+      "id": 19,
+      "name": "Cow Dung Compost",
+      "imageSrc": "../images/cow-manure.jpg",
+      "imageAlt": "Front of men's Basic Tee in black.",
+      "price": 35,
+      "rating": 4.5,
+      "type": "Cow Dung Compost",
+      "quantity": 1
+    },
+    {
+      "id": 20,
+      "name": "Jeevamrutam",
+      "imageSrc": "../images/jeevamrutham.jpg",
+      "imageAlt": "Alt",
+      "price": 22,
+      "rating": 4.5,
+      "type": "Jeevamrutam",
+      "quantity": 1
+    }
+  ]
+}

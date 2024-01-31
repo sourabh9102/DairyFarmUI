@@ -15,9 +15,6 @@ function EmailVerify() {
     const userDetail = useSelector(selectUserDetails);
     const cartItems = useSelector(selectCartProduct);
 
-    console.log("userDetail email verify me", userDetail);
-    console.log("cartItems email verify me", cartItems);
-
     const verifyOtp = () => {
         axios.post('http://localhost:5001/auth/verify', { otp: otp, })
             .then((res) => {

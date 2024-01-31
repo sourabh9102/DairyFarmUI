@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { Fragment } from 'react';
+import { Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Dialog } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
@@ -244,7 +244,7 @@ function Profile() {
   const [updatedEmail, setUpdatedEmail] = useState(userDetail.email);
   const [updatedAddress, setUpdatedAddress] = useState(userDetail.address);
   const [userImage, setUserImage] = useState(null);
-  const [avatarSrc, setAvatarSrc] = useState("/broken-image.jpg");
+  const [avatarSrc, setAvatarSrc] = useState();
 
   const fileInputRef = useRef(null);
 
@@ -283,7 +283,8 @@ function Profile() {
 
     console.log("user click se", updatedData);
 
-    axios.post("http://localhost:5001/auth/updateProfile", updatedData)
+    axios
+      .post("http://localhost:5001/auth/updateProfile", updatedData)
       .then((res) => {
         if (res.data.success) {
           alert("Profile updated successfully");
@@ -304,55 +305,49 @@ function Profile() {
     const input = document.createElement("input");
     input.type = "file";
     input.accept = "image/*";
-
     input.addEventListener("change", (event) => {
       const file = event.target.files[0];
-
       if (file) {
         const reader = new FileReader();
         reader.onload = (e) => {
           setAvatarSrc(e.target.result);
         };
         reader.readAsDataURL(file);
-
         const formData = new FormData();
         formData.append("file", file);
-
         const userId = userDetail.id;
         formData.append("userId", userId);
-
-        // console.log("formData user id k baad", formData);
-        // console.log("formData object entry", Object.fromEntries(formData));
-
         const imageFormData = Object.fromEntries(formData);
+        axios
+          .post("http://localhost:5001/auth/profilePicUpload", imageFormData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((res) => {
+            console.log("res.data", res.data);
+            if (res.data.success) {
+              console.log("Image uploaded successfully.");
+              const imageUrl = `http://localhost:5001${res.data.profileImage}`;
+              console.log("imageUrl", imageUrl);
+              setAvatarSrc(imageUrl);
 
-        // console.log("imageFormData", imageFormData);
-
-        // console.log("Avatar source:", avatarSrc);
-
-        axios.post("http://localhost:5001/auth/profilePicUpload", imageFormData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-        .then((res) => {
-          console.log("res.data",res.data);
-          if (res.data.success) {
-            // console.log("res.data.profileImage", res.data.profileImage);
-            console.log("Image uploaded successfully.");
-            
-            const imageUrl = res.data.profileImage;
-            // console.log("imageUrl", imageUrl);
-            setAvatarSrc(imageUrl);
-          }
-        })
-        .catch((error) => {
-          console.log("Error:", error);
-        });
+              // const imageUrl = res.data.profileImage;
+              // console.log("imageUrl", imageUrl);
+              // setAvatarSrc(`http://localhost:5001/${imageUrl}`);
+            }
+          })
+          .catch((error) => {
+            console.log("Error:", error);
+          });
       }
     });
-
     input.click();
+  };
+
+  const handleAvatarError = () => {
+    // Handle the error gracefully, set a default image, or log the error
+    setAvatarSrc("/images/productImg3.jpg");
   };
 
   return (
@@ -370,22 +365,20 @@ function Profile() {
           </div>
 
           <Stack direction="row" spacing={2} className="ml-auto">
-          <Avatar
-            sx={{ bgcolor: deepOrange[500] }}
-            alt={"DairyDelight"}
-            src={avatarSrc}
-            onClick={handleAvatarClick}
-            onError={() => setAvatarSrc("/broken-image.jpg")}
-          />
+            <Avatar
+              sx={{ bgcolor: deepOrange[500] }}
+              alt={"DairyDelight"}
+              src={avatarSrc}
+              onClick={handleAvatarClick}
+              onError={handleAvatarError}
+            />
           </Stack>
         </div>
         <div className="mt-6">
           {userArray?.map((user, index) => (
             <dl key={index} className="divide-y divide-gray-200 px-3 py-3">
               <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                <dt className="text-sm font-medium text-gray-500">
-                  User Name
-                </dt>
+                <dt className="text-sm font-medium text-gray-500">User Name</dt>
                 <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                   <input
                     type="text"
@@ -438,18 +431,18 @@ function Profile() {
                 </dd>
               </div>
               <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-b sm:border-gray-200">
-  <dt className="text-sm font-medium text-gray-500 invisible"></dt>
-  <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-    <span className="flex-grow"></span>
-    <button
-      type="button"
-      className="px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-      onClick={submitUpdate}
-    >
-      Update
-    </button>
-  </dd>
-</div>
+                <dt className="text-sm font-medium text-gray-500 invisible"></dt>
+                <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  <span className="flex-grow"></span>
+                  <button
+                    type="button"
+                    className="px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    onClick={submitUpdate}
+                  >
+                    Update
+                  </button>
+                </dd>
+              </div>
             </dl>
           ))}
         </div>

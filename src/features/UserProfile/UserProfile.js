@@ -21,21 +21,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import defaultImage from '../../images/default.png';
 
 
-
-
-
-
-
-
-
 function UserProfile() {
     const [name, setName] = useState('');
 
     const navigate = useNavigate();
 
     const userDetail = useSelector(selectUserDetails);
-
-
 
     // const clientId = '992772560544-93mcb3ublmql2p0b9navenei9s40fqvq.apps.googleusercontent.com';
 
@@ -82,9 +73,7 @@ function UserProfile() {
         <>
             <div className=" min-h-0">
                 <SideBarNav />
-
                 <div className="lg:pl-64 flex flex-col flex-1">
-
                     <main className="flex-1 pb-8">
                         {/* Page header */}
                         <div className="bg-white shadow">

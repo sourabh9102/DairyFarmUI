@@ -156,13 +156,6 @@ function EditProfile() {
         <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 pt-20 mt-1">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex flex-col flex-grow bg-cyan-700 pt-5 pb-4 overflow-y-auto">
-            <div className="flex items-center flex-shrink-0 px-4">
-              {/* <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/easywire-logo-cyan-300-mark-white-text.svg"
-                alt="Easywire logo"
-              /> */}
-            </div>
             <nav
               className="mt-5 flex-1 flex flex-col divide-y divide-cyan-800 overflow-y-auto"
               aria-label="Sidebar"
@@ -243,7 +236,6 @@ function Profile() {
   const [updatedName, setUpdatedName] = useState(userDetail.fname);
   const [updatedEmail, setUpdatedEmail] = useState(userDetail.email);
   const [updatedAddress, setUpdatedAddress] = useState(userDetail.address);
-  const [userImage, setUserImage] = useState(null);
   const [avatarSrc, setAvatarSrc] = useState();
 
   const fileInputRef = useRef(null);
@@ -331,10 +323,7 @@ function Profile() {
               const imageUrl = `http://localhost:5001${res.data.profileImage}`;
               console.log("imageUrl", imageUrl);
               setAvatarSrc(imageUrl);
-
-              // const imageUrl = res.data.profileImage;
-              // console.log("imageUrl", imageUrl);
-              // setAvatarSrc(`http://localhost:5001/${imageUrl}`);
+              localStorage.setItem("avatarSrc", imageUrl);
             }
           })
           .catch((error) => {
@@ -345,8 +334,14 @@ function Profile() {
     input.click();
   };
 
+  useEffect(() => {
+    const storedImageUrl = localStorage.getItem("avatarSrc");
+    if (storedImageUrl) {
+      setAvatarSrc(storedImageUrl);
+    }
+  }, []);
+
   const handleAvatarError = () => {
-    // Handle the error gracefully, set a default image, or log the error
     setAvatarSrc("/images/productImg3.jpg");
   };
 
@@ -355,13 +350,9 @@ function Profile() {
       <div className="divide-y divide-gray-200 pt-5">
         <div className="w-full space-y-1 shadow-md rounded px-3 py-3 flex">
           <div>
-            <h3 className="text-lg leading-6 font-medium text-gray-900">
-              Profile
+            <h3 className="text-lg pt-2 font-medium text-gray-900">
+              {userDetail.fname}'s Profile
             </h3>
-            <p className="max-w-2xl text-sm text-gray-500">
-              This information will be displayed publicly so be careful what you
-              share.
-            </p>
           </div>
 
           <Stack direction="row" spacing={2} className="ml-auto">
@@ -377,7 +368,7 @@ function Profile() {
         <div className="mt-6">
           {userArray?.map((user, index) => (
             <dl key={index} className="divide-y divide-gray-200 px-3 py-3">
-              <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+              <div className="py-4 sm:py-4 sm:grid sm:grid-cols-3 sm:gap-4">
                 <dt className="text-sm font-medium text-gray-500">User Name</dt>
                 <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                   <input

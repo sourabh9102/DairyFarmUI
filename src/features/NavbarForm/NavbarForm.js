@@ -34,7 +34,6 @@ import { ProfileMenuDropdown } from "../UserProfile/ProfileMenuDropdown";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setFilteredProducts } from "../Product/productSlice";
-import { FaSearch } from "react-icons/fa";
 
 const navListMenuItems = [
   {
@@ -265,6 +264,7 @@ function NavbarForm() {
         console.log(results);
         setSearchData(results);
       })
+
       .catch((error) => {
         console.error("Error fetching data:", error);
         setSearchData([]);
@@ -274,6 +274,11 @@ function NavbarForm() {
   const handleSearch = (value) => {
     setSearchTerm(value);
     fetchData(value);
+  };
+
+  const clearSearch = () => {
+    setSearchTerm("");
+    setSearchData([]);
   };
 
   useEffect(() => {
@@ -340,7 +345,11 @@ function NavbarForm() {
               <div className="absolute top-full left-0 bg-white mt-2 py-2 rounded-lg shadow-md w-full">
                 <ul className="list-none">
                   {searchData.slice(0, 5).map((product, index) => (
-                    <Link key={index} to={`/productOverview/${product.id}`}>
+                    <Link
+                      key={index}
+                      to={`/productOverview/${product.id}`}
+                      onClick={clearSearch}
+                    >
                       <li className="ml-3 mb-1 mr-3">{product.name}</li>
                     </Link>
                   ))}
@@ -364,25 +373,35 @@ function NavbarForm() {
         <Collapse open={openNav}>
           <NavList />
           <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden relative">
-            <Input
-              label="Search"
-              containerProps={{
-                className: "mb-4",
-              }}
-              value={searchTerm}
-              onChange={handleSearch}
-            />
-            {searchData.length > 0 && (
-              <div className="absolute top-full left-0 bg-white mt-2 py-2 rounded-lg shadow-md w-full">
-                <ul className="list-none">
-                  {searchData.slice(0, 5).map((product, index) => (
-                    <Link key={index}>
-                      <li className="ml-3 mb-1 mr-3">{product.name}</li>
-                    </Link>
-                  ))}
-                </ul>
-              </div>
-            )}
+            <div className="relative">
+              <Input
+                label="Search"
+                containerProps={{
+                  className: "mb-4",
+                }}
+                value={searchTerm}
+                onChange={(e) => handleSearch(e.target.value)}
+              />
+              {searchData.length > 0 && (
+                <div
+                  className={`search-dropdown ${
+                    searchTerm ? "text-black" : "hidden"
+                  }`}
+                >
+                  <ul className="list-none">
+                    {searchData.slice(0, 5).map((product, index) => (
+                      <Link
+                        key={index}
+                        to={`/productOverview/${product.id}`}
+                        onClick={clearSearch}
+                      >
+                        <li className="ml-3 mb-1 mr-3">{product.name}</li>
+                      </Link>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
           </div>
         </Collapse>
       </Navbar>

@@ -1,0 +1,22 @@
+.search-dropdown {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+
+.search-dropdown ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.search-dropdown li {
+  margin: 0.5rem 0;
+}

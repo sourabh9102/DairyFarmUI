@@ -1,5 +1,4 @@
-import { Disclosure, Tab } from "@headlessui/react";
-import { CiStar, CiHeart } from "react-icons/ci";
+import { CiHeart } from "react-icons/ci";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import React, { useEffect, useState } from "react";
@@ -8,10 +7,6 @@ import { useParams } from "react-router-dom";
 import { fetchAllProductByIdAsync, selectProductById } from "./productSlice";
 import { Rating, Stack } from "@mui/material";
 import axios from "axios";
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function ProductOverview() {
   const dispatch = useDispatch();
@@ -56,7 +51,7 @@ export default function ProductOverview() {
 
   const largeImageSrc = `http://localhost:3000/${productImages[
     selectedImageIndex
-  ].replace(/^\.\.\//, "")}`;
+  ]?.replace(/^\.\.\//, "")}`;
 
   return (
     <div className="bg-white">

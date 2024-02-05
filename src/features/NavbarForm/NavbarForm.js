@@ -34,6 +34,7 @@ import { ProfileMenuDropdown } from "../UserProfile/ProfileMenuDropdown";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setFilteredProducts } from "../Product/productSlice";
+import { FaSearch } from "react-icons/fa";
 
 const navListMenuItems = [
   {
@@ -242,38 +243,37 @@ function NavbarForm() {
   const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState();
-  const [searchData, setSearchData] = useState([]);
+  const [searchData, setSearchData] = useState("");
 
   const products = useSelector(selectCartProduct);
   const cartItemCount = products.length;
 
   const userDetail = useSelector((state) => state.userDetails.login);
-  console.log("userDetail", userDetail);
 
-  const handleSearch = async (e) => {
-    const input = e.target.value;
-    setSearchTerm(input);
+  const fetchData = (value) => {
+    fetch(`http://localhost:8080/products`)
+      .then((response) => response.json())
+      .then((json) => {
+        const results = json.filter((user) => {
+          return (
+            value &&
+            user &&
+            user.name &&
+            user.name.toLowerCase().includes(value)
+          );
+        });
+        console.log(results);
+        setSearchData(results);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setSearchData([]);
+      });
+  };
 
-    try {
-      console.log("Fetching data for search term:", input);
-
-      const response = await fetch(`http://localhost:8080/products?q=${input}`);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const searchData = await response.json();
-      console.log("Search data received:", searchData);
-      setSearchData(searchData);
-
-      if (input.trim() === "") {
-        setSearchData("");
-        return;
-      }
-    } catch (error) {
-      console.error("Error fetching search data:", error);
-    }
+  const handleSearch = (value) => {
+    setSearchTerm(value);
+    fetchData(value);
   };
 
   useEffect(() => {
@@ -334,13 +334,13 @@ function NavbarForm() {
                 className: "mb-4",
               }}
               value={searchTerm}
-              onChange={handleSearch}
+              onChange={(e) => handleSearch(e.target.value)}
             />
             {searchData.length > 0 && (
               <div className="absolute top-full left-0 bg-white mt-2 py-2 rounded-lg shadow-md w-full">
                 <ul className="list-none">
                   {searchData.slice(0, 5).map((product, index) => (
-                    <Link key={index}>
+                    <Link key={index} to={`/productOverview/${product.id}`}>
                       <li className="ml-3 mb-1 mr-3">{product.name}</li>
                     </Link>
                   ))}

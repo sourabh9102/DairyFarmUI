@@ -7,11 +7,17 @@ import { useParams } from "react-router-dom";
 import { fetchAllProductByIdAsync, selectProductById } from "./productSlice";
 import { Rating, Stack } from "@mui/material";
 import axios from "axios";
+import { selectCartProduct, setAddToCart } from "../Cart/cartProductSlice";
+import { selectWishlistProduct } from "../Cart/wishlistSlice";
 
 export default function ProductOverview() {
   const dispatch = useDispatch();
   const params = useParams();
   const product = useSelector(selectProductById);
+  console.log("product overview me product", product);
+  const cartProductSlice = useSelector(selectCartProduct);
+  const wishlistProduct = useSelector(selectWishlistProduct);
+
   const [productImages, setProductImages] = useState([]);
   const [isProductLoaded, setIsProductLoaded] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -19,6 +25,14 @@ export default function ProductOverview() {
   useEffect(() => {
     dispatch(fetchAllProductByIdAsync(params.productId.toString()));
   }, [dispatch, params.productId]);
+
+  useEffect(() => {
+    localStorage.setItem("wishlist_product", JSON.stringify(wishlistProduct));
+  }, [wishlistProduct]);
+
+  useEffect(() => {
+    localStorage.setItem("cart_product", JSON.stringify(cartProductSlice));
+  }, [cartProductSlice]);
 
   useEffect(() => {
     if (product && product.length > 0) {
@@ -52,6 +66,12 @@ export default function ProductOverview() {
   const largeImageSrc = `http://localhost:3000/${productImages[
     selectedImageIndex
   ]?.replace(/^\.\.\//, "")}`;
+
+  const handleAddToCart = (e) => {
+    console.log("handleAddToCart clicked");
+    dispatch(setAddToCart(product[0]));
+    console.log("product overview", product[0]);
+  };
 
   return (
     <div className="bg-white">
@@ -123,6 +143,7 @@ export default function ProductOverview() {
                 <button
                   type="button"
                   className="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                  onClick={(e) => handleAddToCart(e)}
                 >
                   <AiOutlineShoppingCart
                     className="h-6 w-6 flex-shrink-0 mr-2"

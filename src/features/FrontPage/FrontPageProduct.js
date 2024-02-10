@@ -139,7 +139,7 @@ function FrontPageProduct() {
   const handleAddToCart = (e, product) => {
     console.log("product---------", product);
     dispatch(setAddToCart(product));
-    // localStorage.setItem('cart_product', JSON.stringify(cartProductSlice));
+    localStorage.setItem("cart_product", JSON.stringify(cartProductSlice));
   };
 
   const handleAddToWishlist = (e, product) => {

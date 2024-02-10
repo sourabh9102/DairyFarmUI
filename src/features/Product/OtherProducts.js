@@ -10,7 +10,6 @@ import {
 } from "@heroicons/react/20/solid";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import { FaPlus } from "react-icons/fa6";
 import "./MilkProduct.css";
 import Pagination from "@mui/material/Pagination";

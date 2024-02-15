@@ -20,7 +20,7 @@ export function ProfileMenuDropdown() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userDetail = useSelector(selectUserDetails);
-  console.log("userDetail1", userDetail);
+  // console.log("userDetail1", userDetail);
   const [userImage, setUserImage] = useState();
 
   const handleLogout = () => {

@@ -139,9 +139,13 @@ export default function Cart() {
           </div>
 
           <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-            <div className="flex justify-between text-base font-medium text-gray-900">
+            <div className="flex justify-between text-base font-medium text-gray-900 my-2">
               <p>Subtotal</p>
               <p>₹ {subtotal}</p>
+            </div>
+            <div className="flex justify-between text-base font-medium text-gray-900 my-2">
+              <p>Total items</p>
+              <p>{products.length} items</p>
             </div>
             <p className="mt-0.5 text-sm text-gray-500">
               Shipping and taxes calculated at checkout.

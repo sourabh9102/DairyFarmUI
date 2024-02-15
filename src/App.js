@@ -35,6 +35,7 @@ import { useSelector } from "react-redux";
 import PageNotFound from "./features/PageNotFound/PageNotFound";
 import LoginRequired from "./features/PageNotFound/LoginRequired";
 import Wishlist from "./features/Cart/Wishlist";
+import OrderDetails from "./features/OrderDetails/OrderDetails";
 
 const App = () => {
   const loggedIn = useSelector((state) => state?.userDetails?.login);
@@ -82,7 +83,7 @@ const App = () => {
             <Route path="/editprofile" element={<EditProfile />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/userprofile" element={<UserProfile />} />
-
+            <Route path="orderDetails" element={<OrderDetails />} />
             <Route path="/updateProfile" element={<UpdateProfile />} />
             <Route path="/changePass" element={<PasswordReset />} />
             <Route path="orderHistory" element={<OrderHistory />} />

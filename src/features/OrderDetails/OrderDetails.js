@@ -19,9 +19,10 @@ export default function OrderDetails() {
   const productDataDetail = useSelector(selectProductDataDetails);
   const billingAddress = useSelector(selectBillAddress);
   const sums = useSelector(selectSums);
-  console.log("sums in order detail", sums);
-  console.log("orderDetails", orderDetail);
-  console.log("productDataDetails", productDataDetail);
+  // console.log("sums in order detail", sums);
+  // console.log("orderDetails", orderDetail);
+  // console.log("productDataDetails", productDataDetail);
+  // console.log()
 
   const dispatch = useDispatch();
 

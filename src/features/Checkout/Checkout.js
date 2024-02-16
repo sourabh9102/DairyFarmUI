@@ -105,7 +105,7 @@ export default function Checkout() {
       quantity: product.quantity,
     }));
 
-    console.log("orderDataArray", orderDataArray);
+    // console.log("orderDataArray", orderDataArray);
 
     axios
       .post("http://localhost:5001/auth/order", { orderData: orderDataArray })
@@ -114,9 +114,9 @@ export default function Checkout() {
           const orderDetailsArray = res.data.orders;
           const billAddress = res.data.billedAddresses;
           const sums = res.data.sums;
-          console.log("orderDetailsArray", orderDetailsArray);
-          console.log("billAddress", billAddress);
-          console.log("sums", sums);
+          // console.log("orderDetailsArray", orderDetailsArray);
+          // console.log("billAddress", billAddress);
+          // console.log("sums", sums);
           orderDetailsArray.forEach((orderDetails, index) => {
             const billingAddress = billAddress[index];
             dispatch(

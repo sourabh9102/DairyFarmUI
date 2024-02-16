@@ -14,7 +14,7 @@ export default function Cart() {
   const [open, setOpen] = useState(true);
   const selectCartProductSlice = useSelector(selectCartProduct);
   const products = useSelector(selectCartProduct).flat();
-  console.log("products redux", products);
+  // console.log("products redux", products);
   const [subtotal, setSubtotal] = useState(calculateSubtotal());
   const dispatch = useDispatch();
 
@@ -23,16 +23,12 @@ export default function Cart() {
     if (!storedCart) {
       localStorage.setItem("cart_product", JSON.stringify([]));
     }
-    console.log("storedCart", storedCart);
+    // console.log("storedCart", storedCart);
   }, []);
 
   useEffect(() => {
     localStorage.setItem("cart_product", JSON.stringify(products));
     setSubtotal(calculateSubtotal(products));
-    console.log(
-      "calculateSubtotal(products.flat())",
-      calculateSubtotal(products)
-    );
   }, [products]);
 
   function calculateSubtotal(products) {

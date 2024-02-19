@@ -9,6 +9,10 @@ import {
 import { SideBarNav } from "../UserProfile/UserProfile";
 import { Link } from "react-router-dom";
 import Invoice from "./Invoice";
+import { useRef, useState } from "react";
+import { PDFViewer } from "@react-pdf/renderer";
+import ReactToPrint from "react-to-print";
+import "./OrderSummary.css";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -19,6 +23,11 @@ export default function OrderSummary() {
   const productDataDetail = useSelector(selectProductDataDetails);
   const billingAddress = useSelector(selectBillAddress);
   const sums = useSelector(selectSums);
+  const [showInvoice, setShowInvoice] = useState(false);
+  const componentRef = useRef();
+  const handlePrint = () => {
+    window.print();
+  };
 
   const dispatch = useDispatch();
 
@@ -35,12 +44,6 @@ export default function OrderSummary() {
       <div className="lg:pl-64 flex flex-col flex-1">
         <main className="flex-1 pb-8">
           <div className="max-w-2xl mx-auto sm:py-14 sm:px-6 lg:max-w-7xl lg:px-8">
-            <Invoice
-              orderDetail={orderDetail}
-              productDataDetail={productDataDetail}
-              billingAddress={billingAddress}
-              sums={sums}
-            />
             <div className="px-4 space-y-4 sm:px-0 sm:items-baseline sm:justify-between sm:space-y-0">
               <h1 className="mb-2 text-sm font-semibold uppercase tracking-wide text-indigo-600">
                 Thank you!
@@ -53,12 +56,26 @@ export default function OrderSummary() {
                 with you soon.
               </p>
               <div className="flex sm:items-baseline sm:space-x-4 mt-5">
-                <Link
-                  to="#"
-                  className="hidden text-sm font-medium text-indigo-600 hover:text-indigo-500 sm:block"
-                >
-                  View invoice<span aria-hidden="true"> &rarr;</span>
-                </Link>
+                <ReactToPrint
+                  trigger={() => (
+                    <button
+                      onClick={() => {
+                        const invoiceElement =
+                          document.getElementById("invoice");
+                        if (invoiceElement) {
+                          invoiceElement.classList.toggle("hidden");
+                        }
+                      }}
+                      className="w-full flex items-center justify-center bg-white mt-6 py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:w-auto sm:mt-0"
+                    >
+                      View invoice<span aria-hidden="true"> &rarr;</span>
+                    </button>
+                  )}
+                  content={() => componentRef.current}
+                />
+              </div>
+              <div id="invoice" className="hidden" ref={componentRef}>
+                <Invoice />
               </div>
               <p className="pt-2 text-sm text-gray-600">
                 Order placed{" "}
@@ -69,12 +86,6 @@ export default function OrderSummary() {
                   {orderDetail[0].dateTime}
                 </time>
               </p>
-              <Link
-                to="#"
-                className="text-sm font-medium text-indigo-600 hover:text-indigo-500 sm:hidden"
-              >
-                View invoice<span aria-hidden="true"> &rarr;</span>
-              </Link>
             </div>
 
             {/* Products */}

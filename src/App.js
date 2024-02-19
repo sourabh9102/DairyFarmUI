@@ -36,6 +36,7 @@ import PageNotFound from "./features/PageNotFound/PageNotFound";
 import LoginRequired from "./features/PageNotFound/LoginRequired";
 import Wishlist from "./features/Cart/Wishlist";
 import OrderDetails from "./features/OrderDetails/OrderDetails";
+import Invoice from "./features/OrderSummary/Invoice";
 
 const App = () => {
   const loggedIn = useSelector((state) => state?.userDetails?.login);
@@ -89,6 +90,7 @@ const App = () => {
             <Route path="orderHistory" element={<OrderHistory />} />
             <Route path="orderSummary" element={<OrderSummary />} />
             <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/invoice" element={<Invoice />} />
           </>
         ) : (
           <Route path="*" element={<LoginRequired />} />

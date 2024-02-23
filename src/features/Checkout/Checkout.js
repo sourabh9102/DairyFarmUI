@@ -99,7 +99,7 @@ export default function Checkout() {
 
     const orderDataArray = products.map((product) => ({
       userId,
-      productId: product.id,
+      id: product.id,
       paymentMethod,
       billingAddress: selectedAddress,
       quantity: product.quantity,

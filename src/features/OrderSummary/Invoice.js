@@ -7,7 +7,7 @@ import {
   selectSums,
 } from "../OrderDetails/orderDetailsSlice";
 import { useSelector } from "react-redux";
-// import logo from "../../images/001.jpg";
+import { SideBarNav } from "../UserProfile/UserProfile";
 
 const styles = StyleSheet.create({
   page: {
@@ -27,88 +27,91 @@ const Invoice = (ref) => {
   const billingAddress = useSelector(selectBillAddress);
   const sums = useSelector(selectSums);
   return (
-    <Document>
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <div className="bg-white shadow-md rounded-lg overflow-hidden">
-            {/* Header */}
-            <div className="bg-gray-800 text-white py-4 px-6 flex justify-between items-center">
-              <div>
-                <h1 className="text-2xl font-semibold">Dairy Delight</h1>
-                <p>123 Street Name, City, Country</p>
-                <p>Phone: +1234567890</p>
-                <p>Email: info@example.com</p>
-              </div>
-              {/* <div>
+    <>
+      <div className="sidebar-nav">
+        <SideBarNav />
+      </div>
+      <Document>
+        <Page size="A4" style={styles.page}>
+          <View style={styles.section}>
+            <div className="lg:pl-64 bg-white shadow-md rounded-lg overflow-hidden">
+              {/* Header */}
+              <div className="bg-gray-800 text-white py-4 px-6 flex justify-between items-center">
+                <div>
+                  <h1 className="text-2xl font-semibold">Dairy Delight</h1>
+                  <p>123 Street Name, City, Country</p>
+                  <p>Phone: +1234567890</p>
+                  <p>Email: info@example.com</p>
+                </div>
+                {/* <div>
                 <img src={logo} alt="Company Logo" className="h-12" />
               </div> */}
-            </div>
+              </div>
 
-            {/* Customer information */}
-            <div className="py-4 px-6">
-              <h2 className="text-lg font-semibold">Billing Address</h2>
-              <p>
-                {billingAddress[0].fname} {billingAddress[0].lname}
-              </p>
-              <p>{billingAddress[0].address}</p>
-              <p>{billingAddress[0].email}</p>
-              {/* Add any additional customer details */}
-            </div>
+              {/* Customer information */}
+              <div className="py-4 px-6">
+                <h2 className="text-lg font-semibold">Billing Address</h2>
+                <p>
+                  {billingAddress[0].fname} {billingAddress[0].lname}
+                </p>
+                <p>{billingAddress[0].address}</p>
+                <p>{billingAddress[0].email}</p>
+              </div>
 
-            {/* Order details */}
-            <div className="border-t border-gray-200">
-              <h1 className="text-2xl px-6 py-4 bg-gray-100 font-semibold">
-                Order Details
-              </h1>
-              {productDataDetail?.map((product, index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-between py-2 px-6 border-b border-gray-200"
-                >
-                  <div>
-                    <p className="text-lg font-semibold">{product.name}</p>
-                    <p>Quantity: {product.quantity}</p>
-                    {/* Add any additional product details */}
+              {/* Order details */}
+              <div className="border-t border-gray-200">
+                <h1 className="text-2xl px-6 py-4 bg-gray-100 font-semibold">
+                  Order Details
+                </h1>
+                {productDataDetail?.map((product, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between py-2 px-6 border-b border-gray-200"
+                  >
+                    <div>
+                      <p className="text-lg font-semibold">{product.name}</p>
+                      <p>Quantity: {product.quantity}</p>
+                    </div>
+                    <div>
+                      <p className="text-lg font-semibold">₹{product.price}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-lg font-semibold">₹{product.price}</p>
-                  </div>
+                ))}
+                {/* Total amount */}
+                <div className="flex items-center justify-between py-2 px-6">
+                  <p className="font-semibold">Subtotal:</p>
+                  <p>₹{sums?.totalSubtotal}</p>
                 </div>
-              ))}
-              {/* Total amount */}
-              <div className="flex items-center justify-between py-2 px-6">
-                <p className="font-semibold">Subtotal:</p>
-                <p>₹{sums?.totalSubtotal}</p>
+                <div className="flex items-center justify-between py-2 px-6">
+                  <p className="font-semibold">Shipping:</p>
+                  <p>₹{sums?.totalShippingCost}</p>
+                </div>
+                <div className="flex items-center justify-between py-2 px-6">
+                  <p className="font-semibold">Tax:</p>
+                  <p>₹{sums?.totalTax}</p>
+                </div>
+                <div className="flex items-center justify-between py-2 px-6">
+                  <p className="font-semibold">Total:</p>
+                  <p className="text-indigo-600">₹{sums?.totalTotal}</p>
+                </div>
               </div>
-              <div className="flex items-center justify-between py-2 px-6">
-                <p className="font-semibold">Shipping:</p>
-                <p>₹{sums?.totalShippingCost}</p>
-              </div>
-              <div className="flex items-center justify-between py-2 px-6">
-                <p className="font-semibold">Tax:</p>
-                <p>₹{sums?.totalTax}</p>
-              </div>
-              <div className="flex items-center justify-between py-2 px-6">
-                <p className="font-semibold">Total:</p>
-                <p className="text-indigo-600">₹{sums?.totalTotal}</p>
-              </div>
-            </div>
 
-            {/* Payment information */}
-            <div className="py-4 px-6">
-              <h2 className="text-lg font-semibold">Payment Information</h2>
-              <p>Payment method: {orderDetail[0].paymentMethod}</p>
-              {/* Add any additional payment details */}
-            </div>
+              {/* Payment information */}
+              <div className="py-4 px-6">
+                <h2 className="text-lg font-semibold">Payment Information</h2>
+                <p>Payment method: {orderDetail[0].paymentMethod}</p>
+              </div>
 
-            {/* Footer */}
-            <div className="bg-gray-800 text-white py-4 px-6 text-center">
-              <p>Thank you for your purchase!</p>
+              {/* Footer */}
+              <div className="bg-gray-800 text-white py-4 px-6 text-center">
+                <p>Thank you for your purchase!</p>
+              </div>
             </div>
-          </div>
-        </View>
-      </Page>
-    </Document>
+          </View>
+        </Page>
+        <style>{`@media print {.sidebar-nav { display: none !important;}}`}</style>
+      </Document>
+    </>
   );
 };
 

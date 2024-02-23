@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectCartProduct } from "../Cart/cartProductSlice";
 import {
   selectBillAddress,
   selectOrderDetails,
@@ -7,16 +6,11 @@ import {
   selectSums,
 } from "../OrderDetails/orderDetailsSlice";
 import { SideBarNav } from "../UserProfile/UserProfile";
-import { Link } from "react-router-dom";
 import Invoice from "./Invoice";
-import { useRef, useState } from "react";
-import { PDFViewer } from "@react-pdf/renderer";
+import { useEffect, useRef, useState } from "react";
 import ReactToPrint from "react-to-print";
 import "./OrderSummary.css";
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+import { setOrderProductData } from "./orderSummarySlice";
 
 export default function OrderSummary() {
   const orderDetail = useSelector(selectOrderDetails);
@@ -37,6 +31,27 @@ export default function OrderSummary() {
     billingAddress: billingAddress[index],
     sums: sums,
   }));
+
+  useEffect(() => {
+    localStorage.setItem("orderDetail", JSON.stringify(orderDetail));
+    localStorage.setItem(
+      "productDataDetail",
+      JSON.stringify(productDataDetail)
+    );
+  }, [orderDetail, productDataDetail]);
+
+  useEffect(() => {
+    const storedOrderDetail = localStorage.getItem("orderDetail");
+    const storedProductDataDetail = localStorage.getItem("productDataDetail");
+    if (storedOrderDetail && storedProductDataDetail) {
+      dispatch(
+        setOrderProductData({
+          orders: JSON.parse(storedOrderDetail),
+          products: JSON.parse(storedProductDataDetail),
+        })
+      );
+    }
+  }, []);
 
   return (
     <div className="bg-gray-50">

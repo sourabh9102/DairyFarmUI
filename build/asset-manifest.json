@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/static/css/main.69a637b5.css",
+    "main.js": "/static/js/main.72a15f93.js",
+    "static/js/703.8dc19e5b.chunk.js": "/static/js/703.8dc19e5b.chunk.js",
+    "static/js/513.5907874a.chunk.js": "/static/js/513.5907874a.chunk.js",
+    "static/media/slideshow3.png": "/static/media/slideshow3.cdaec6e1a9fc47579301.png",
+    "static/media/slideshow1.png": "/static/media/slideshow1.938d8829378c677f3af9.png",
+    "static/media/pageNotFound.jpg": "/static/media/pageNotFound.45d8f3eb930a735c91d9.jpg",
+    "static/media/slideshow2.png": "/static/media/slideshow2.15c60d798faac105a2a1.png",
+    "static/media/discountProductBottom.png": "/static/media/discountProductBottom.543a99c3b957c324c544.png",
+    "static/media/discountProductSide.png": "/static/media/discountProductSide.92d51f9d63d38fa48019.png",
+    "static/media/discountProduct1.png": "/static/media/discountProduct1.cdaaa8f179420ddac042.png",
+    "static/media/naturalMilk.jpg": "/static/media/naturalMilk.f212af3ac46ecf6f2e72.jpg",
+    "static/media/discountProduct2.png": "/static/media/discountProduct2.86fbb2ca01749cff478e.png",
+    "static/media/heroSection.png": "/static/media/heroSection.1490fc5828b82691cd67.png",
+    "static/media/default.png": "/static/media/default.eaf92bbc50762052f0c4.png",
+    "static/media/logo.png": "/static/media/logo.eaf92bbc50762052f0c4.png",
+    "static/media/team4.jpg": "/static/media/team4.67f604e6cf00f1ba76bd.jpg",
+    "static/media/team3.jpg": "/static/media/team3.76f79b9d6b27ce657c60.jpg",
+    "static/media/team6.jpg": "/static/media/team6.012fe62148bf0b641508.jpg",
+    "static/media/team5.jpg": "/static/media/team5.688128934f09f9beb242.jpg",
+    "static/media/team2.jpg": "/static/media/team2.ca8eb645a72099348a82.jpg",
+    "static/media/appstore-btn.svg": "/static/media/appstore-btn.1c7c005af3cfcf8f6fed8c6ec9e0a9ea.svg",
+    "static/media/mastercard.svg": "/static/media/mastercard.2f85c47fea271eeec99838608ab0a97f.svg",
+    "static/media/googleplay-btn.svg": "/static/media/googleplay-btn.1339418d80f0bd0bf755cf52017c044c.svg",
+    "static/media/amazonpay.svg": "/static/media/amazonpay.d8c0f351dfb84b9568378528eb9a8d58.svg",
+    "static/media/paypal.svg": "/static/media/paypal.1ee8e90779c122270194301256e2c789.svg",
+    "static/media/visa.svg": "/static/media/visa.67c72dccd00fe5eba7790269ce3536d4.svg",
+    "static/media/blog-post.1.md": "/static/media/blog-post.1.feffb8942bbd17649053.md",
+    "index.html": "/index.html",
+    "static/media/blog-post.2.md": "/static/media/blog-post.2.47a03d106f22d5a84637.md",
+    "static/media/blog-post.3.md": "/static/media/blog-post.3.b82ac62fc356dd6c78d2.md",
+    "main.69a637b5.css.map": "/static/css/main.69a637b5.css.map",
+    "main.72a15f93.js.map": "/static/js/main.72a15f93.js.map",
+    "703.8dc19e5b.chunk.js.map": "/static/js/703.8dc19e5b.chunk.js.map",
+    "513.5907874a.chunk.js.map": "/static/js/513.5907874a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.69a637b5.css",
+    "static/js/main.72a15f93.js"
+  ]
+}

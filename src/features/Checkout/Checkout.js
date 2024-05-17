@@ -28,10 +28,7 @@ export default function Checkout() {
   const navigate = useNavigate();
 
   const addresses = useSelector((state) => state.address);
-  // console.log("addresses resuc ka", addresses);
-
   const userDetail = useSelector(selectUserDetails);
-  // console.log("userDetail", userDetail);
 
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState("cash");
@@ -97,6 +94,11 @@ export default function Checkout() {
   const handleOrderDetails = () => {
     const { id: userId } = userDetail;
 
+    if (!selectedAddress) {
+      alert("Please select an address.");
+      return;
+    }
+
     const orderDataArray = products.map((product) => ({
       userId,
       id: product.id,
@@ -105,35 +107,38 @@ export default function Checkout() {
       quantity: product.quantity,
     }));
 
-    // console.log("orderDataArray", orderDataArray);
+    console.log("products", products);
+    console.log("paymentMethod", paymentMethod);
 
-    axios
-      .post("http://localhost:5001/auth/order", { orderData: orderDataArray })
-      .then((res) => {
-        if (res.data.success) {
-          const orderDetailsArray = res.data.orders;
-          const billAddress = res.data.billedAddresses;
-          const sums = res.data.sums;
-          // console.log("orderDetailsArray", orderDetailsArray);
-          // console.log("billAddress", billAddress);
-          // console.log("sums", sums);
-          orderDetailsArray.forEach((orderDetails, index) => {
-            const billingAddress = billAddress[index];
-            dispatch(
-              setOrderDetails({
-                order: orderDetails,
-                billedAddress: billingAddress,
-                sums: sums,
-              })
-            );
-            dispatch(setProductDataDetails(products[index]));
+    paymentMethod === "card"
+      ? navigate("/payment")
+      : paymentMethod === "cash" &&
+        axios
+          .post("http://localhost:5001/auth/order", {
+            orderData: orderDataArray,
+          })
+          .then((res) => {
+            if (res.data.success) {
+              const orderDetailsArray = res.data.orders;
+              const billAddress = res.data.billedAddresses;
+              const sums = res.data.sums;
+              orderDetailsArray.forEach((orderDetails, index) => {
+                const billingAddress = billAddress[index];
+                dispatch(
+                  setOrderDetails({
+                    order: orderDetails,
+                    billedAddress: billingAddress,
+                    sums: sums,
+                  })
+                );
+                dispatch(setProductDataDetails(products[index]));
+              });
+              navigate("/orderDetails");
+            }
+          })
+          .catch((err) => {
+            console.log("Error:", err);
           });
-          navigate("/orderDetails");
-        }
-      })
-      .catch((err) => {
-        console.log("Error:", err);
-      });
   };
 
   const handleSelectAddress = (address) => {

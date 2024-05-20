@@ -13,3 +13,4 @@ milk-ecomm-backend/node_modules/
 .env.local
 node_modules
 node_modules
+.vercel
